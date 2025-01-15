@@ -5,7 +5,7 @@ import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-  const { mealSlug } = await params;
+  const { mealSlug } = params; // directly access mealSlug
   let meal;
   try {
     meal = await getMeal(mealSlug);
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
   if (!meal) {
     notFound();
   }
-  // console.log(meal);
+
   return {
     title: meal.title,
     description: meal.summary,
@@ -24,10 +24,10 @@ export async function generateMetadata({ params }) {
 }
 
 const MealDetaisPage = async ({ params }) => {
-  const singleMeal = await params;
+  const { mealSlug } = params; // directly access mealSlug
   let meal;
   try {
-    meal = await getMeal(singleMeal.mealSlug);
+    meal = await getMeal(mealSlug);
   } catch (err) {
     console.log(err.message);
   }
@@ -35,7 +35,7 @@ const MealDetaisPage = async ({ params }) => {
   if (!meal) {
     notFound();
   }
-  // console.log(meal.instructions);
+
   meal.instructions = meal.instructions.replace(/\n/g, "<br>");
 
   return (
@@ -47,7 +47,7 @@ const MealDetaisPage = async ({ params }) => {
         <div className={styles.headerText}>
           <h1>{meal.title}</h1>
           <p className={styles.creator}>
-            by <a href={`mail:${meal.creator_email}`}>{meal.creator}</a>
+            by <a href={`mailto:${meal.creator_email}`}>{meal.creator}</a>
           </p>
           <p className={styles.summary}>{meal.summary}</p>
         </div>
