@@ -4,18 +4,18 @@ import Image from "next/image";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
-// export async function generateMetadata({ params }) {
-//   const { mealSlug } = await params;
-//   const meal = await getMeal(mealSlug);
-//   if (!meal) {
-//     notFound();
-//   }
-//   // console.log(meal);
-//   return {
-//     title: meal.title,
-//     description: meal.summary,
-//   };
-// }
+export async function generateMetadata({ params }) {
+  const { mealSlug } = await params;
+  const meal = await getMeal(mealSlug);
+  if (!meal) {
+    notFound();
+  }
+  // console.log(meal);
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
 
 const MealDetaisPage = async ({ params }) => {
   const singleMeal = await params;
