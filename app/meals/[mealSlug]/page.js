@@ -6,7 +6,13 @@ import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const { mealSlug } = await params;
-  const meal = await getMeal(mealSlug);
+  let meal;
+  try {
+    meal = await getMeal(mealSlug);
+  } catch (err) {
+    console.log(err.message);
+  }
+
   if (!meal) {
     notFound();
   }
