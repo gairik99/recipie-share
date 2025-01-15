@@ -5,7 +5,9 @@ import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-  const { mealSlug } = params; // directly access mealSlug
+  const para = await params;
+  let mealSlug = para.mealSlug;
+  // directly access mealSlug
   let meal;
   try {
     meal = await getMeal(mealSlug);
@@ -24,7 +26,8 @@ export async function generateMetadata({ params }) {
 }
 
 const MealDetaisPage = async ({ params }) => {
-  const { mealSlug } = params; // directly access mealSlug
+  const para = await params;
+  let mealSlug = para.mealSlug; // directly access mealSlug
   let meal;
   try {
     meal = await getMeal(mealSlug);

@@ -9,8 +9,9 @@ export const metadata = {
   description: "Browse meals, shared by a food-loving community.",
 };
 
-function Meals() {
+async function Meals() {
   const meals = getMeals();
+  // console.log("mealspage", meals);
   return <MealsGrid meals={meals} />;
 }
 
