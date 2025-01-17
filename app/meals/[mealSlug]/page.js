@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({ params }) {
   const para = await params;
   let mealSlug = para.mealSlug;
-  // directly access mealSlug
+  console.log(mealSlug);
   let meal;
   try {
     meal = await getMeal(mealSlug);
